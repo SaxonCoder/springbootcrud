@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>书籍展示</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header">
+                <h1>
+                    <small>书籍列表 —————— 显示所有书籍</small>
+                </h1>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4 column">
+                <a class="btn btn-primary" th:href="@{/toAddUserPage}">新增书籍</a>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/book/allBook">显示全部书籍</a>
+            </div>
+
+            <div class="col-md-8 column">
+                <form class="form-inline" action="${pageContext.request.contextPath}/book/queryBook" method="post"
+                      style="float: right">
+                    <span style="color: red;font-weight: bold"></span>
+                    <input type="text" name="queryBookName" class="form-control" placeholder="请输入要查询的书籍名称">
+                    <input type="submit" value="查询" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>用户ID</th>
+                    <th>用户名</th>
+                    <th>用户密码</th>
+                    <th>用户邮箱</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="user:${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.password}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td>
+                        <a th:href="@{/toUpdatePage/{id}(id=${user.id})}">修改</a>
+                        &nbsp; | &nbsp;
+                        <a th:href="@{/deleteUser/{id}(id=${user.id})}">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
